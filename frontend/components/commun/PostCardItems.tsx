@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { HeartIcon, LogInIcon, MessageCircleIcon, SendIcon } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 
 
 type PostProps = {
@@ -267,7 +268,7 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
           {/* POST IMAGE */}
           {post.postImage && (
             <div className="rounded-lg overflow-hidden">
-              <img  src={post.postImage} alt="Post content" className="w-full h-auto object-cover" />
+              <Image height={1200} width={1200}  src={post.postImage} alt="Post content" className="w-full h-auto object-cover" />
             </div>
           )}
 

@@ -9,6 +9,7 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ImageIcon, Loader2Icon, SendIcon, XIcon } from "lucide-react";
+import Image from "next/image";
 // import ImageUpload from "./ImageUpload";
 // import toast from "react-hot-toast";
 // /import ImageUpload from "./ImageUpload";
@@ -109,7 +110,7 @@ function CreatePostItems({getUserId}: Props) {
                     imgRef.current.value = "";
                 }}
               />
-              <img src={imageUrl as string} alt="photo" className='w-full mx-auto h-72 object-contain rounded' />
+              <Image width={1200} height={1200}  src={imageUrl as string} alt="photo" className='w-full mx-auto h-72 object-contain rounded' />
             </div>
 				  )}
 
