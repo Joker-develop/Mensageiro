@@ -1,0 +1,132 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  email      String   @unique
+  username   String   @unique
+  clerkId    String   @unique
+  name       String?
+  bio        String?
+  profileImg String?  @default("default.jpg")
+  coverImg   String?  @default("default.jpg")
+  location   String?
+  website    String?
+  createAt   DateTime @default(now())
+  updateAt   DateTime @updatedAt
+
+  // relations
+  posts    Post[]
+  comments Comment[]
+  likes    Like[]
+
+  followers Follows[] @relation("following") // seguir a
+  following Follows[] @relation("follower") // seguidores
+
+  notifications       Notification[] @relation("userNotifications") // notificações para o usuário 
+  notificationsCreate Notification[] @relation("notificationCreator") // notificações criada pelo usuário
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorId  String   @db.ObjectId
+  content   String?
+  postImage String?
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+
+  //relations
+  author        User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments      Comment[]
+  likes         Like[]
+  notifications Notification[]
+}
+
+model Comment {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  content  String
+  authorId String   @db.ObjectId
+  postId   String   @db.ObjectId
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  //relations
+  notifications Notification[]
+
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([authorId, postId]) // para fazer uma consulta mais rá+ida
+}
+
+model Like {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  postId   String   @db.ObjectId
+  userId   String   @db.ObjectId
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([userId, postId]) // para fazer uma consulta mais rá+ida
+}
+
+model Follows {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  followerId  String   @db.ObjectId
+  followingId String   @db.ObjectId
+  createAt    DateTime @default(now())
+  updateAt    DateTime @updatedAt
+
+  //relations
+  follower  User @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@index([followerId, followingId])
+}
+
+model Notification {
+  id        String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String           @db.ObjectId
+  creatorId String           @db.ObjectId
+  postId    String?          @db.ObjectId
+  comentId  String?          @db.ObjectId
+  type      NotificationType
+  read      Boolean          @default(false)
+  createAt  DateTime         @default(now())
+  updateAt  DateTime         @updatedAt
+
+  // relations
+  user    User     @relation("userNotifications", fields: [userId], references: [id], onDelete: Cascade)
+  creator User     @relation("notificationCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+  post    Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  comment Comment? @relation(fields: [comentId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createAt])
+}
+
+model Trend {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  hashtag  String
+  counter  Int      @default(1)
+  updateAt DateTime @updatedAt
+}
+
+enum NotificationType {
+  LIKE
+  COMMENT
+  FOLLOW
+}
