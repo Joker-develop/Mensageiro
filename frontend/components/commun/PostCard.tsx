@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import PostCardItems from "./PostCardItems";
 import { useQuery } from "@tanstack/react-query";
 import PostSkeleton from "../skeletonss/PostSkeleton";
@@ -129,7 +128,6 @@ function PostCard({ dbUserId, authImg, feedType }: { dbUserId: string | null, au
   const {
 		data: posts,
 		isLoading,
-		refetch,
 		isRefetching,
 	} = useQuery({
 		queryKey: [KEY_ENDPOINT, "comments"],
@@ -147,9 +145,9 @@ function PostCard({ dbUserId, authImg, feedType }: { dbUserId: string | null, au
 		},
 	});
 
-  useEffect(() => {
-		refetch();
-	}, [refetch, authImg, dbUserId]);
+//   useEffect(() => {
+// 		refetch();
+// 	}, [refetch, authImg, dbUserId]);
 
   return (
     <>
