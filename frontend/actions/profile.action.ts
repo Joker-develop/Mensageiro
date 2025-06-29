@@ -3,7 +3,7 @@
 export const getProfileByUsername = async (username : string) => {
     try {
 
-        const resp = await fetch( "http://localhost:8000/privateping", {
+        const resp = await fetch( "https://imppm-backend.onrender.com/privateping", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export const getProfileByUsername = async (username : string) => {
 
 export const getUserPosts = async (userId: string) => {
     try {
-        const resp = await fetch( `http://localhost:8000/publications/user/${userId}/posts?page=1`);
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/user/${userId}/posts?page=1`);
 
         const data = await resp.json();
         if ( !resp.ok ) throw new Error( data.error ||"Alguma coisa está errada");
@@ -35,7 +35,7 @@ export const getUserPosts = async (userId: string) => {
 
 export const getUserLikedPosts = async (userId: string) => {
     try {
-        const resp = await fetch( `http://localhost:8000/publications/user/${userId}/likes`);
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/user/${userId}/likes`);
 
         const data = await resp.json();
         if ( !resp.ok ) throw new Error( data.error ||"Alguma coisa está errada");
@@ -48,7 +48,7 @@ export const getUserLikedPosts = async (userId: string) => {
 
 export const getFollowUserPosts = async (userId: string) => {
     try {
-        const resp = await fetch( `http://localhost:8000/publications/user/${userId}/following`);
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/user/${userId}/following`);
 
         const data = await resp.json();
         if ( !resp.ok ) throw new Error( data.error ||"Alguma coisa está errada");
@@ -67,7 +67,7 @@ export const isFollowing = async (username: string, userId: string) => {
 
         if (!correntUserId) return false;
 
-        const resp = await fetch( `http://localhost:8000/publications/user/${userId}/isfollowing`,{
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/user/${userId}/isfollowing`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export const updateProfile = async (username: string, formData: FormData) => {
         const website = formData.get("website") as string;
 
         console.log({name, bio, location, website})
-        const resp = await fetch( `http://localhost:8000/publications/user/${authId}/update`,{
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/user/${authId}/update`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

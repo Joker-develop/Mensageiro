@@ -67,7 +67,7 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
   const { mutate: deletePost, isPending: isDeleting } = useMutation({
 		mutationFn: async ({authorId, postId}: PropsUser) => {
 			try {
-				const resp = await fetch(`http://localhost:8000/publications/post/${postId}`, {
+				const resp = await fetch(`https://imppm-backend.onrender.com/publications/post/${postId}`, {
 					method: "DELETE",
           headers: {
               "Content-Type": "application/json",

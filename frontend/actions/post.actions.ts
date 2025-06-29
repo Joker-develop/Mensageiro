@@ -1,7 +1,7 @@
 export const getFeddPosts = async () => {
 
     try {
-        const resp = await fetch( "http://localhost:8000/publications/feed");
+        const resp = await fetch( "https://imppm-backend.onrender.com/publications/feed");
         const data = await resp.json();
         if ( !resp.ok ) throw new Error( data.error ||"Alguma coisa está errada");
         
@@ -13,7 +13,7 @@ export const getFeddPosts = async () => {
 
 export const toggleLike  = async (userId: string, postId: string) => {
     try {
-        const resp = await fetch( `http://localhost:8000/publications/post/${postId}/like`,{
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/post/${postId}/like`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export const toggleLike  = async (userId: string, postId: string) => {
 
 export const createComment = async (authorId: string, postId: string, content: string) => {
     try {
-        const resp = await fetch( `http://localhost:8000/publications/post/${postId}/comment`,{
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/post/${postId}/comment`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export const createComment = async (authorId: string, postId: string, content: s
 
 export const deletePost = async (authorId: string, postId: string) => {
     try {
-        const resp = await fetch( `http://localhost:8000/publications/post/${postId}`,{
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/post/${postId}`,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export const deletePost = async (authorId: string, postId: string) => {
 
 export const deleteComment = async (authorId: string, commentId: string, postId: string) => {
     try {
-        const resp = await fetch( `http://localhost:8000/publications/post/${postId}/comment/${commentId}`,{
+        const resp = await fetch( `https://imppm-backend.onrender.com/publications/post/${postId}/comment/${commentId}`,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

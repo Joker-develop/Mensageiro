@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { SignInButton, useUser } from "@clerk/nextjs";
@@ -11,7 +12,6 @@ import { Button } from "../ui/button";
 import { HeartIcon, LogInIcon, MessageCircleIcon, SendIcon } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Image from "next/image";
 
 
 type PostProps = {
@@ -81,7 +81,7 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
   const { mutate: likePost, isPending: isLiking } = useMutation({
 		mutationFn: async ({userId, postId}: PropsLike) => {
 			try {
-				const resp = await fetch( `http://localhost:8000/publications/post/${postId}/like`, {
+				const resp = await fetch( `https://imppm-backend.onrender.com/publications/post/${postId}/like`, {
           method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -98,20 +98,21 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
         return { success: false, error: "Falha ao gostar" };
 			}
 		},
-		onSuccess: (updatedLikes) => {
-			// this is not the best UX, bc it will refetch all posts
-			// queryClient.invalidateQueries({ queryKey: ["posts"] });
+		onSuccess: (updatedLikes: PostProps) => {
 
 			// instead, update the cache directly for that post
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			queryClient.setQueryData(["posts"], (oldData: any[]) => {
+			queryClient.setQueryData(["likes"], (oldData: PostProps[]) => {
 				return oldData.map((p) => {
-					if (p._id === post.id) {
+					if (p.id === post.id) {
 						return { ...p, likes: updatedLikes };
 					}
 					return p;
 				});
 			});
+
+
+			// this is not the best UX, bc it will refetch all posts
+			queryClient.invalidateQueries({ queryKey: ["likes"] });
 
 		},
 		onError: (error) => {
@@ -122,7 +123,7 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
   const { mutate: commentPost, isPending: isCommenting } = useMutation({
 		mutationFn: async ({ authorId, postId, content }: PropsComent) => {
 			try {
-				const resp = await fetch( `http://localhost:8000/publications/post/${postId}/comment`, {
+				const resp = await fetch( `https://imppm-backend.onrender.com/publications/post/${postId}/comment`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -141,14 +142,14 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
 		},
 		onSuccess: () => {
 			setNewComment("");
-			queryClient.invalidateQueries({ queryKey: ["posts"] });
+			queryClient.invalidateQueries({ queryKey: ["posts","comments"] });
 		},
 	});
 
   const { mutate: deletePost, isPending: isDeleting } = useMutation({
 		mutationFn: async ({authorId, postId}: PropsUser) => {
 			try {
-				const resp = await fetch(`http://localhost:8000/publications/post/${postId}`, {
+				const resp = await fetch(`https://imppm-backend.onrender.com/publications/post/${postId}`, {
 					method: "DELETE",
           headers: {
               "Content-Type": "application/json",
@@ -172,7 +173,7 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
   const { mutate: deleteComment, isPending: isDeletingComment } = useMutation({
 		mutationFn: async ({authorId, postId, commentId}: PropsUserComent) => {
 			try {
-				const resp = await fetch(`http://localhost:8000/publications/post/${postId}/comment/${commentId}`, {
+				const resp = await fetch(`https://imppm-backend.onrender.com/publications/post/${postId}/comment/${commentId}`, {
 					method: "DELETE",
           headers: {
               "Content-Type": "application/json",
@@ -189,7 +190,7 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
 			}
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["posts"] });
+			queryClient.invalidateQueries({ queryKey: ["posts", "comments"] });
 		},
 	});
 
@@ -268,7 +269,7 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
           {/* POST IMAGE */}
           {post.postImage && (
             <div className="rounded-lg overflow-hidden">
-              <Image height={1200} width={1200}  src={post.postImage} alt="Post content" className="w-full h-auto object-cover" />
+              <img  src={post.postImage} alt="Post content" className="w-full h-auto object-cover" />
             </div>
           )}
 

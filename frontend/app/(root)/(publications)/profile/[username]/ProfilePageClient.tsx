@@ -116,7 +116,7 @@ function ProfilePageClient({
   const { mutateAsync: updateProfile, isPending: isUpdatingProfile } = useMutation({
     mutationFn: async ({authId, name, bio, location, website}: {authId:string, name: string, bio: string, location: string, website: string}) => {
       try {
-        const resp = await fetch(`http://localhost:8000/publications/user/${authId}/update`, {
+        const resp = await fetch(`https://imppm-backend.onrender.com/publications/user/${authId}/update`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

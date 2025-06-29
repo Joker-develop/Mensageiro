@@ -2,7 +2,8 @@
 import { notFound } from "next/navigation";
 import ProfilePageClient from "./ProfilePageClient";
 import { getProfileByUsername, isFollowing } from "@/actions/profile.action";
-import { getUserByClerkId } from "@/actions/user.actions";
+import { Metadata } from "next";
+// import { getUserByClerkId } from "@/actions/user.actions";
   
 interface UserData {
   id: string;
@@ -17,33 +18,37 @@ interface UserData {
   _count: { followers: number, following: number, posts: number }
 }
 
+type PropsParams = {
+  params: Promise<{ username: string}>;
+}
+
+
 // interface PageProps { params: { username: string } }
 
-export async function generateMetadata({ params }: { params: { username: string } }) {
-  const username = params.username;
+export async function generateMetadata({ params }: PropsParams ): Promise<Metadata> {
 
-  const user: UserData = await getProfileByUsername(username as string);
-  if (!user) return;
+  const username = (await params).username;
+  const user: UserData = await getProfileByUsername(username);
 
   return {
     title: `${user.name ?? user.username}`,
     description: user.bio || `Confira o perfil de ${user.username}.`,
-  }
+  };
 }
   
-async function ProfilePageServer({ params }: { params: { username: string } }) {
-  const username = params.username;
+async function ProfilePageServer({ params }: PropsParams)  {
+  const username = (await params).username;
 
-  const dbUserId: UserData = await getUserByClerkId();
-  // const user: UserData = await getProfileByUsername(username);
+  // const dbUserId: UserData = await getUserByClerkId();
+  const user: UserData = await getProfileByUsername(username);
 
-  if (!dbUserId || !username) notFound();
+  if (!user ) notFound();
 
   const [isCurrentUserFollowing] = await Promise.all([
-    isFollowing(username as string, dbUserId.id),
+    isFollowing(username, user.id),
   ]);
 
-  // if (!user) notFound();
+  if (!user) return notFound();
 
   // const [posts, likedPosts, followPosts, isCurrentUserFollowing] = await Promise.all([
   //   getUserPosts(user.id),
@@ -105,9 +110,9 @@ async function ProfilePageServer({ params }: { params: { username: string } }) {
 
   return (
     <ProfilePageClient
-      authImg={ dbUserId ? dbUserId.profileImg : null }
-      dbUserId={ dbUserId ? dbUserId.id : null }
-      user={dbUserId}
+      authImg={ user ? user.profileImg : null }
+      dbUserId={ user ? user.id : null }
+      user={user}
       isFollowing={isCurrentUserFollowing}
     />
   );

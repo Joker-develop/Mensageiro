@@ -80,19 +80,19 @@ function PostCard({ dbUserId, authImg, feedType }: { dbUserId: string | null, au
   const getPostEndpoint = () => {
 		switch (feedType) {
 			case "forYou":
-				return "http://localhost:8000/publications/feed";
+				return "https://imppm-backend.onrender.com/publications/feed";
 			case "following":
-				return `http://localhost:8000/publications/user/${dbUserId}/following`;
+				return `https://imppm-backend.onrender.com/publications/user/${dbUserId}/following`;
 			case "posts":
-				return `http://localhost:8000/publications/user/${dbUserId}/posts?page=1`;
+				return `https://imppm-backend.onrender.com/publications/user/${dbUserId}/posts?page=1`;
 			case "likes":
-				return `http://localhost:8000/publications/user/${dbUserId}/likes`;
+				return `https://imppm-backend.onrender.com/publications/user/${dbUserId}/likes`;
 			default:
-				return "http://localhost:8000/publications/feed";
+				return "https://imppm-backend.onrender.com/publications/feed";
 		}
 	};
 
-  const getDescribePostEndpoint = () => {
+   const getDescribePostEndpoint = () => {
 		switch (feedType) {
 			case "forYou":
 				return "Sem postagens nesta Aba. Trocar 👻";
@@ -107,8 +107,24 @@ function PostCard({ dbUserId, authImg, feedType }: { dbUserId: string | null, au
 		}
 	};
 
+	const getKeyPoint = () => {
+		switch (feedType) {
+			case "forYou":
+				return "feeds";
+			case "following":
+				return "followings";
+			case "posts":
+				return "posts";
+			case "likes":
+				return "likes";
+			default:
+				return "feeds";
+		}
+	};
+
 	const POST_ENDPOINT = getPostEndpoint();
-  const DESCRIBE_POST_ENDPOINT = getDescribePostEndpoint();
+  	const DESCRIBE_POST_ENDPOINT = getDescribePostEndpoint();
+	const KEY_ENDPOINT = getKeyPoint();
 
   const {
 		data: posts,
@@ -116,7 +132,7 @@ function PostCard({ dbUserId, authImg, feedType }: { dbUserId: string | null, au
 		refetch,
 		isRefetching,
 	} = useQuery({
-		queryKey: ["posts"],
+		queryKey: [KEY_ENDPOINT, "comments"],
 		queryFn: async () => {
 			try {
 				const resp = await fetch(POST_ENDPOINT);

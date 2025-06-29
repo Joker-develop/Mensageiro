@@ -18,7 +18,7 @@ export const syncUser = async () => {
         coverImg = user.imageUrl;
 
     try {
-        const resp = await fetch( "http://localhost:8000/publications/auth/signup", {
+        const resp = await fetch( "https://imppm-backend.onrender.com/publications/auth/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const syncUser = async () => {
 
 
 // export const logOut = async () => {
-//     const resp = await fetch("http://localhost:8000/publications/auth/logout", {
+//     const resp = await fetch("https://imppm-backend.onrender.com/publications/auth/logout", {
 //         method: "POST",
 //     });
 
@@ -73,7 +73,7 @@ export const getUserByClerkId = async () => {
         try {
             const username = user.username ?? user.emailAddresses[0].emailAddress.split("@")[0];
 
-            const resp = await fetch( "http://localhost:8000/privateping", {
+            const resp = await fetch( "https://imppm-backend.onrender.com/privateping", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

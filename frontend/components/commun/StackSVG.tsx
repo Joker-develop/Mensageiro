@@ -52,7 +52,7 @@ const StackSVG = () => {
                 </g>
                 <path d="M412 96L412 0" stroke="url(#paint0_linear_341_27683)" strokeOpacity="0.1" pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px"></path>
                 <g>
-                    <path d="M412 263.5L412 184" stroke="var(--geist-foreground)" strokeOpacity="0.1" style={{transform: "scale(-1)", transformOrigin: "412px 223.75px 0px"}} pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px" transformOrigin="412px 223.75px"></path>
+                    <path d="M412 263.5L412 184" stroke="var(--geist-foreground)" strokeOpacity="0.1" style={{transform: "scale(-1)", transformOrigin: "412px 223.75px 0px"}} pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px" transform-origin="412px 223.75px"></path>
                     <path d="M412 263.5L412 184" stroke="url(#pink-pulse-1)" strokeLinecap="round" strokeWidth="2"></path>
                 </g>
                 <g>
@@ -60,9 +60,9 @@ const StackSVG = () => {
                     <path d="M508 96L508 88C508 85.7909 509.791 84 512 84L886 84C888.209 84 890 85.7909 890 88L890 264" stroke="url(#orange-pulse-2)" strokeWidth="2"></path>
                 </g>
                 <path d="M436 96L436 0" stroke="url(#paint1_linear_341_27683)" strokeOpacity="0.1" pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px"></path>
-                <path d="M436 214L436 184" stroke="var(--geist-foreground)" strokeOpacity="0.1" style={{transform: "scale(-1)", transformOrigin: "436px 199px 0px"}} pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px" transformOrigin="436px 199px"></path>
+                <path d="M436 214L436 184" stroke="var(--geist-foreground)" strokeOpacity="0.1" style={{transform: "scale(-1)", transformOrigin: "436px 199px 0px"}} pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px" transform-origin="436px 199px"></path>
                 <path d="M460 96L460 64" stroke="var(--geist-foreground)" strokeOpacity="0.1" pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px"></path>
-                <path d="M460 239L460 184" stroke="var(--geist-foreground)" strokeOpacity="0.1" style={{transform: "scale(-1)", transformOrigin: "460px 211.5px 0px"}} pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px" transformOrigin="460px 211.5px"></path>
+                <path d="M460 239L460 184" stroke="var(--geist-foreground)" strokeOpacity="0.1" style={{transform: "scale(-1)", transformOrigin: "460px 211.5px 0px"}} pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px" transform-origin="460px 211.5px"></path>
                 <path d="M484 96L484 24C484 21.7909 485.791 20 488 20L554 20" stroke="url(#paint2_linear_341_27683)" strokeOpacity="0.1" pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px"></path>
                 <path d="M484 184L484 210C484 212.209 485.791 214 488 214L560 214" stroke="var(--geist-foreground)" strokeOpacity="0.1" pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px"></path>
                 <path d="M508 184L508 193C508 195.209 509.791 197 512 197L560 197" stroke="var(--geist-foreground)" strokeOpacity="0.1" pathLength="1" strokeDashoffset="0px" strokeDasharray="1px 1px"></path>

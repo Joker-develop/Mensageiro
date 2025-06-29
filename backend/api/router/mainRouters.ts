@@ -12,6 +12,10 @@ import protectRoute from "../middleware/protectRoute.middleware";
 
 const mainRouter = Router(); 
 
+mainRouter.get("/", (res, resp) => {
+    resp.send("Banckend rodando");
+})
+
 mainRouter.get("/ping", pingController.ping as unknown as RequestHandler) // testando as rotas
 mainRouter.post("/privateping",  pingController.privatePing as unknown as RequestHandler) // testando as rotas privadas
 

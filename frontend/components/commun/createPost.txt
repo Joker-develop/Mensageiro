@@ -49,7 +49,7 @@ function CreatePostItems({idUser}: Props) {
       if (!userID) return null;
      
       const getUserId = userID.id;
-      const resp = await fetch( "http://localhost:8000/publications/post/create", {
+      const resp = await fetch( "https://imppm-backend.onrender.com/publications/post/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

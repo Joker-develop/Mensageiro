@@ -42,7 +42,7 @@ function CreatePostItems({getUserId}: Props) {
 	} = useMutation({
 		mutationFn: async ({ getUserId, content, imageUrl }: createPostParams ) => {
 			try {
-				const res = await fetch("http://localhost:8000/publications/post/create", {
+				const res = await fetch("https://imppm-backend.onrender.com/publications/post/create", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",

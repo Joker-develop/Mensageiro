@@ -41,7 +41,7 @@ const Home = () => {
               <h2 className="text-[#ff2800] text-[2rem] font-extrabold leading-[1.2] ">Começar a sua graduação para o ensino médio nunca foi tão simples</h2>
               <span className="text-[#17375c] md:text-[1.5rem] text-[1.2rem] ">Vem para <strong>Instituto Médio Politecnico Privado Mensageiro <strong className="rounded-[10px] bg-[#17375c] text-white pt-[3px] pb-[3px] pl-[20px] pr-[20px]">IMPPM</strong></strong> e dê o ínicio na carreira escolhida de forma fácil</span>
               <div className="w-full flex max-md:flex-col items-center gap-[15px]">
-                <Link href="/cursos" className="rounded-[20px] cursor-pointer pt-[5px] pb-[5px] pl-[20px] pr-[20px] border-[1px] border-solid border-[#ff2800] text-[#ff2800] hover:font-extrabold hover:!text-[#ff2800] uppercase max-md:text-[1rem]"> explorar cursos</Link>
+                <Link href="/curso" className="rounded-[20px] cursor-pointer pt-[5px] pb-[5px] pl-[20px] pr-[20px] border-[1px] border-solid border-[#ff2800] text-[#ff2800] hover:font-extrabold hover:!text-[#ff2800] uppercase max-md:text-[1rem]"> explorar cursos</Link>
                 <Link href="/about" className="rounded-[20px] cursor-pointer pt-[5px] pb-[5px] pl-[20px] pr-[20px] bg-[#ff2800] text-white hover:!text-white hover:font-extrabold uppercase max-md:text-[1rem]"> Sobre a instituição</Link>
               </div>
               <p className="text-[#17375c] font-extrabold text-[.8rem]">Possuímo uma mensalidade que cabe para todos os bolsos, para isso faça a adesão ao Programa do IMPPM de forma segura</p>

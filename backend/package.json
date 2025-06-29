@@ -4,17 +4,19 @@
   "description": "",
   "main": "api/server.ts",
   "scripts": {
-    "dev": "node --import=tsx --watch --env-file=.env ./api/server.ts"
+    "dev": "NODE_ENV=development node --import=tsx --watch --env-file=.env ./api/server.ts",
+    "start": "NODE_ENV=production node dist/server.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.23",
     "@clerk/express": "^1.4.4",
     "@prisma/client": "^6.5.0",
     "@types/passport": "^1.0.17",
+    "bcrypt": "^6.0.0",
     "bcrypt-ts": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.5.1",
@@ -27,6 +29,7 @@
     "mongodb": "^6.15.0",
     "mongoose": "^8.12.1",
     "slug": "^10.0.0",
+    "slugify": "^1.6.6",
     "zod": "^3.24.2"
   },
   "devDependencies": {

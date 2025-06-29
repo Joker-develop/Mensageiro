@@ -49,7 +49,7 @@ async function WhoToFollow() {
       if (!userID) return null;
       
       const getUserId = userID.id;
-      const resp = await fetch( "http://localhost:8000/publications/suggestions", {
+      const resp = await fetch( "https://imppm-backend.onrender.com/publications/suggestions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

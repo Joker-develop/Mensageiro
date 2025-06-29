@@ -28,7 +28,7 @@ function FollowButton({ userId }: { userId: string }) {
       if (!userID) return null;
       
       const getUserId = userID.id;
-      const resp = await fetch( `http://localhost:8000/publications/user/${userId}/follow`, {
+      const resp = await fetch( `https://imppm-backend.onrender.com/publications/user/${userId}/follow`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

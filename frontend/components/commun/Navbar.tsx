@@ -7,9 +7,20 @@ import { auth } from "@clerk/nextjs/server";
 
 async function Navbar() {
 
+  let contador = 1;
+
   const {userId} = await auth();
 
-  if (!userId) await syncUser(); // POST
+  if (userId){ 
+
+    if ( contador == 1 ){
+      await syncUser(); // POST
+    }
+
+    contador += 1;
+  } else{ 
+    contador = 1;
+  }
 
   return (
     <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
