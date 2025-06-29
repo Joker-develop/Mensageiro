@@ -98,17 +98,17 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
         return { success: false, error: "Falha ao gostar" };
 			}
 		},
-		onSuccess: (updatedLikes: PostProps) => {
+		onSuccess: () => {
 
 			// instead, update the cache directly for that post
-			queryClient.setQueryData(["likes"], (oldData: PostProps[]) => {
-				return oldData.map((p) => {
-					if (p.id === post.id) {
-						return { ...p, likes: updatedLikes };
-					}
-					return p;
-				});
-			});
+			// queryClient.setQueryData(["likes"], (oldData: PostProps[]) => {
+			// 	return oldData.map((p) => {
+			// 		if (p.id === post.id) {
+			// 			return { ...p, likes: updatedLikes };
+			// 		}
+			// 		return p;
+			// 	});
+			// });
 
 
 			// this is not the best UX, bc it will refetch all posts
