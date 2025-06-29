@@ -142,7 +142,7 @@ function PostCardItems({ post, dbUserId, authImg }: { post: PostProps; dbUserId:
 		},
 		onSuccess: () => {
 			setNewComment("");
-			queryClient.invalidateQueries({ queryKey: ["posts","comments"] });
+			queryClient.invalidateQueries({ queryKey: ["comments"] });
 		},
 	});
 
